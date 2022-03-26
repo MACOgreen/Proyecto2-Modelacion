@@ -1,7 +1,6 @@
 from matplotlib import pyplot as plt
 import networkx as nx
 
-
 data = [
     {
         "activity": "start",
@@ -141,7 +140,7 @@ def create_graph(critical_list):
         str2 = "{}:\n{}|{}\n{}|{}".format(
             node["activity"], node["es"], node["ef"], node["ls"], node["lf"]
         )
-        print(str2)
+        #print(str2)
         if node["activity"] in critical_list:
             graph.add_node(
                 node["activity"],
@@ -207,4 +206,4 @@ def create_graph(critical_list):
     plt.show()
 
 
-main()
+#main()
