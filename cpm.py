@@ -1,8 +1,9 @@
 from matplotlib import pyplot as plt
 import networkx as nx
+from sympy import true
 
 
-data = [
+datas = [
     {
         "activity": "start",
         "duration": 0,
@@ -86,12 +87,129 @@ data = [
     },
 ]
 
+data_unordered = [
+    {
+        "activity": "start",
+        "duration": 0,
+        "predecessors": [],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    },
+    {
+        "activity": "g",
+        "duration": 10,
+        "predecessors": ["e"],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    },
+    {
+        "activity": "f",
+        "duration": 8,
+        "predecessors": ["e"],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    },
+    {
+        "activity": "b",
+        "duration": 5,
+        "predecessors": ["start"],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    },
+    {
+        "activity": "c",
+        "duration": 4,
+        "predecessors": ["a"],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    },
+    {
+        "activity": "d",
+        "duration": 6,
+        "predecessors": ["b", "c"],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    },
+    {
+        "activity": "a",
+        "duration": 2,
+        "predecessors": ["start"],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    },
+    {
+        "activity": "e",
+        "duration": 3,
+        "predecessors": ["d"],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    },
+    {
+        "activity": "end",
+        "duration": 0,
+        "predecessors": ["f", "g"],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    },
+]
+
 
 def main():
-    create_graph(get_critical_path(cpm_algorithm()))
+    ordered_list = order_data(data_unordered)
+    cpm = cpm_algorithm(ordered_list)
+    create_graph(get_critical_path(cpm), ordered_list)
+    create_graph_simple(ordered_list)
 
 
-def cpm_algorithm():
+def check_existency(incomplete, complete):
+    # print("{}\n{}".format(incomplete, complete))
+    cont = 0
+    for node in incomplete:
+        for node2 in complete:
+            if node == node2["activity"]:
+                cont += 1
+    if cont == incomplete.__len__():
+        return true
+    else:
+        return False
+
+
+def order_data(data_list):
+    ordered_list = []
+    while data_list:
+        for index, act in enumerate(data_list):
+            if act["predecessors"]:
+                if check_existency(act["predecessors"], ordered_list):
+                    ordered_list.append(act)
+                    data_list.pop(index)
+            else:
+                # act["predecessors"].append("start")
+                ordered_list.append(act)
+                data_list.pop(index)
+    # for node in ordered_list:
+    #    print(node)
+    return ordered_list
+
+
+def cpm_algorithm(data):
     for node in data:
         # print("{}: ".format(node["activity"]))
         preds = node["predecessors"]
@@ -134,7 +252,7 @@ def get_critical_path(activities):
     return critical_list
 
 
-def create_graph(critical_list):
+def create_graph(critical_list, data):
     graph = nx.Graph()
     for node in data:
         str = "{}|{}\n{}|{}".format(node["es"], node["ef"], node["ls"], node["lf"])
@@ -185,7 +303,7 @@ def create_graph(critical_list):
         pos,
         font_size=10,
         with_labels=True,
-        font_weight="normal",
+        font_weight="bold",
         verticalalignment="center",
         edge_color=colors,
         node_size=900,
@@ -202,6 +320,51 @@ def create_graph(critical_list):
     nx.draw_networkx_labels(
         graph, shifted_pos, labels=labels, horizontalalignment="center"
     )
+    # turn off frame
+    plt.axis("off")
+    plt.show()
+
+
+def create_graph_simple(data):
+    graph = nx.Graph()
+    for node in data:
+        graph.add_node(
+            node["activity"],
+            color="gray",
+            es=node["es"],
+            ef=node["ef"],
+            ls=["ls"],
+            lf=node["lf"],
+            Name=str,
+        )
+        try:
+            for pred in node["predecessors"]:
+                graph.add_edge(node["activity"], pred, color="black", weight=2)
+        except:
+            continue
+    colors = nx.get_edge_attributes(graph, "color").values()
+    node_color = nx.get_node_attributes(graph, "color").values()
+    weights = nx.get_edge_attributes(graph, "weight").values()
+    plt.figure(figsize=(12, 8))
+    plt.title("CPM Graph")
+    pos = nx.spring_layout(graph, scale=3)
+    nx.draw(
+        graph,
+        pos,
+        font_size=10,
+        with_labels=True,
+        font_weight="bold",
+        verticalalignment="center",
+        edge_color=colors,
+        node_size=900,
+        node_color=node_color,
+        width=list(weights),
+    )
+    x_values, y_values = zip(*pos.values())
+    y_max = max(y_values)
+    y_min = min(y_values)
+    y_margin = (y_max - y_min) * 0.20
+    plt.ylim(y_min - y_margin, y_max + y_margin)
     # turn off frame
     plt.axis("off")
     plt.show()
