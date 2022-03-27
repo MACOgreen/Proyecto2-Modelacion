@@ -1,13 +1,5 @@
-from cgitb import text
 from tkinter import *
-from os import system
-
-from numpy import DataSource
 from cpm import cpm_algorithm, get_critical_path,create_graph
-
-from matplotlib.pyplot import close
-
-
 
 def cpm(data):
 
@@ -25,7 +17,7 @@ def cpm(data):
     ##
     ###Funciones
     def graficar():
-        create_graph(get_critical_path(cpm_algorithm()))
+        create_graph(get_critical_path(cpm_algorithm(data)))
     ###
     
     ### Botones
@@ -36,19 +28,8 @@ def cpm(data):
     boton_grafo.config(width=22,height=2)
     ##
 
-   
 
-    ###
-
-    ###Texto
-    # resultado=Label(ventana,text="",font=("Arial",12))
-    # resultado.place(x=130,y=10)
-
-    ###
-
-    ####Ejecucion al abrir la ventana 
-    data=cpm_algorithm()
-    str2=""
+    ####Ejecucion al abrir la ventana
     for node in data:
         str2 ="Actividad: {}  ||Earty Start: {}||  Early finish: {}||  Late Start: {}||  Late finish: {}".format(
             node["activity"], node["es"], node["ef"], node["ls"], node["lf"]
