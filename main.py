@@ -1,90 +1,8 @@
-from os import system
 import sys
-from tkinter import *
+from tkinter import Label,Tk, filedialog, Button
 from VentanaCpm import cpm
-data = [
-    {
-        "activity": "start",
-        "duration": 0,
-        "predecessors": [],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "a",
-        "duration": 2,
-        "predecessors": ["start"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "b",
-        "duration": 5,
-        "predecessors": ["start"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "c",
-        "duration": 4,
-        "predecessors": ["a"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "d",
-        "duration": 6,
-        "predecessors": ["b", "c"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "e",
-        "duration": 3,
-        "predecessors": ["d"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "f",
-        "duration": 8,
-        "predecessors": ["e"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "g",
-        "duration": 10,
-        "predecessors": ["e"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "end",
-        "duration": 0,
-        "predecessors": ["f", "g"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-]
+from importData import importDataFunction
+data = []
 
 ventana = Tk()
 
@@ -100,11 +18,18 @@ titulo.place(x=95,y= 20)
 ##
 
 ### Funciones
+def loadDataFile():
+    filename = filedialog.askopenfilename(initialdir=".", title="Select a File", filetypes=[("Text files","*.txt*")])
+    data = importDataFunction(filename)
+    print(data)
+
 def salir():
     sys.exit()
 
 def vcpm():
     cpm(data)
+
+
 
 ###
 
@@ -112,7 +37,7 @@ def vcpm():
 ### Botones 
 
 ##Boton de carga de archivo
-boton_cargar=Button(ventana,text="Cargar archivo",font=("Arial",11))
+boton_cargar=Button(ventana,text="Cargar archivo",font=("Arial",11), command=loadDataFile)
 boton_cargar.place(x=190,y=80)
 boton_cargar.config(width=15,height=2)
 ##
@@ -136,7 +61,5 @@ boton_out.config(width=15,height=2)
 ##
 
 ###
-
-
 
 ventana.mainloop()

@@ -1,96 +1,10 @@
 from matplotlib import pyplot as plt
 import networkx as nx
 
-data = [
-    {
-        "activity": "start",
-        "duration": 0,
-        "predecessors": [],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "a",
-        "duration": 2,
-        "predecessors": ["start"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "b",
-        "duration": 5,
-        "predecessors": ["start"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "c",
-        "duration": 4,
-        "predecessors": ["a"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "d",
-        "duration": 6,
-        "predecessors": ["b", "c"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "e",
-        "duration": 3,
-        "predecessors": ["d"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "f",
-        "duration": 8,
-        "predecessors": ["e"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "g",
-        "duration": 10,
-        "predecessors": ["e"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "end",
-        "duration": 0,
-        "predecessors": ["f", "g"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-]
-
-
 def main():
     create_graph(get_critical_path(cpm_algorithm()))
 
-
-def cpm_algorithm():
+def cpm_algorithm(data):
     for node in data:
         # print("{}: ".format(node["activity"]))
         preds = node["predecessors"]
