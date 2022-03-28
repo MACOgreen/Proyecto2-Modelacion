@@ -257,7 +257,10 @@ def get_critical_path(activities):
 def create_graph(critical_list, data):
     graph = nx.Graph()
     for node in data:
-        str = "{}|{}\n{}|{}".format(node["es"], node["ef"], node["ls"], node["lf"])
+        holgura = node["lf"] - node["ef"]
+        str = "{}|{}\n{}|{}-{}".format(
+            node["es"], node["ef"], node["ls"], node["lf"], holgura
+        )
         str2 = "{}:\n{}|{}\n{}|{}".format(
             node["activity"], node["es"], node["ef"], node["ls"], node["lf"]
         )
@@ -320,7 +323,7 @@ def create_graph(critical_list, data):
     shift = [0, 0.45]
     shifted_pos = {node: node_pos + shift for node, node_pos in pos.items()}
     nx.draw_networkx_labels(
-        graph, shifted_pos, labels=labels, horizontalalignment="center"
+        graph, shifted_pos, labels=labels, horizontalalignment="left"
     )
     # turn off frame
     plt.axis("off")
