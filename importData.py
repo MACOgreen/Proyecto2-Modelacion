@@ -15,10 +15,10 @@ def importDataFunction(route):
         columns[2] = columns[2].strip()
         columns[3] = columns[3].strip()
         data.append({
-            "activity": int(columns[0]),
+            "activity": columns[0],
             "description": columns[1],
             "duration": int(columns[2]),
-            "predecessors":[int(number) for number in columns[3].split(",") if columns[3] != "--"],
+            "predecessors":[number for number in columns[3].split(",") if columns[3] != "--"],
             "es":0,
             "ef":0,
             "ls":0,

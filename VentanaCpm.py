@@ -1,5 +1,5 @@
 from tkinter import *
-from cpm import cpm_algorithm, get_critical_path,create_graph
+from cpm import cpm_algorithm, get_critical_path,create_graph, order_data
 
 def cpm(data):
 
@@ -30,6 +30,7 @@ def cpm(data):
 
 
     ####Ejecucion al abrir la ventana
+    data=order_data(data)
     for node in cpm_algorithm(data):
         str2 ="Actividad: {}  ||Earty Start: {}||  Early finish: {}||  Late Start: {}||  Late finish: {}".format(
             node["activity"], node["es"], node["ef"], node["ls"], node["lf"]
