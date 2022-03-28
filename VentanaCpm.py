@@ -11,7 +11,6 @@ from cpm import (
 def just_graph(data):
     ordered_list = order_data(data.copy())
     create_graph_simple(ordered_list)
-    print("Data:\n{}".format(data))
 
 
 def cpm(data):
