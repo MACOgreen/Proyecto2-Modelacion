@@ -3,7 +3,7 @@ import networkx as nx
 from sympy import true
 
 
-datas = [
+"""datas = [
     {
         "activity": "a",
         "duration": 2,
@@ -76,7 +76,7 @@ datas = [
         "ls": 0,
         "lf": 0,
     },
-]
+]"""
 
 data_unordered = [
     {
@@ -185,19 +185,27 @@ def order_data(data_list):
         "lf": 0,
     }
     ordered_list = []
+    not_end_nodes = []
     ordered_list.append(start_act)
     while data_list:
         for index, act in enumerate(data_list):
             if act["predecessors"]:
                 if check_existency(act["predecessors"], ordered_list):
+                    not_end_nodes.append(act["activity"])
                     ordered_list.append(act)
                     data_list.pop(index)
+                    for index, x in enumerate(not_end_nodes):
+                        if x in act["predecessors"]:
+                            not_end_nodes.pop(index)
             else:
                 act["predecessors"].append("start")
                 ordered_list.append(act)
                 data_list.pop(index)
     # for node in ordered_list:
     #    print(node)
+    # print(not_end_nodes)
+    end_act["predecessors"] = not_end_nodes
+    # print(end_act)
     ordered_list.append(end_act)
     return ordered_list
 
