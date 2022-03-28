@@ -102,7 +102,6 @@ def salir():
 
 
 def vcpm():
-    # print("Data: \n{}".format(data))
     cpm(data)
 
 

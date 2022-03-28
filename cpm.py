@@ -195,10 +195,7 @@ def order_data(data_list):
                     ordered_list.append(act)
                     data_list.pop(index)
                     for x in act["predecessors"]:
-                        print("revisado: {}".format(x))
-                        print("a revisar: {}".format(act["predecessors"]))
                         if x in not_end_nodes:
-                            print("eliminado: {}".format(x))
                             not_end_nodes.remove(x)
             else:
                 act["predecessors"].append("start")
@@ -208,7 +205,7 @@ def order_data(data_list):
     #    print(node)
     # print(not_end_nodes)
     end_act["predecessors"] = not_end_nodes
-    print(end_act)
+    # print(end_act)
     ordered_list.append(end_act)
     return ordered_list
 
