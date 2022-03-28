@@ -1,6 +1,6 @@
 from matplotlib import pyplot as plt
 import networkx as nx
-
+#from main import data
 def main():
     create_graph(get_critical_path(cpm_algorithm()))
 
@@ -47,7 +47,7 @@ def get_critical_path(activities):
     return critical_list
 
 
-def create_graph(critical_list):
+def create_graph(critical_list,data):
     graph = nx.Graph()
     for node in data:
         str = "{}|{}\n{}|{}".format(node["es"], node["ef"], node["ls"], node["lf"])

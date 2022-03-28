@@ -1,3 +1,5 @@
+from tkinter import Label,Tk, filedialog, Button
+
 def importDataFunction(route):
     # Cargar todas las líneas del archivo
     file = open(route, 'r')
@@ -24,4 +26,5 @@ def importDataFunction(route):
         })
 
     return data
+
 
