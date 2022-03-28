@@ -1,6 +1,5 @@
 from matplotlib import pyplot as plt
 import networkx as nx
-from sympy import true
 
 
 """datas = [
@@ -160,7 +159,7 @@ def check_existency(incomplete, complete):
             if node == node2["activity"]:
                 cont += 1
     if cont == incomplete.__len__():
-        return true
+        return True
     else:
         return False
 
