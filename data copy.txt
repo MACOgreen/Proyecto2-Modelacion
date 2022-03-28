@@ -1,0 +1,9 @@
+Numero |Descripción                                 |Duración   |Predecesoras
+A      | Actividad 01                               |  2        |--
+B      | Actividad 02                               |  5        |--
+C      | Actividad 03                               |  4        |A                            
+D      | Actividad 04                               |  6        |B,C
+E      | Actividad 05                               |  3        |D
+F      | Actividad 06                               |  8        |E
+G      | Actividad 07                               |  10       |E
+H      | Actividad 07                               |  10       |F,G
