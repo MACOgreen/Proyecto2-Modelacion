@@ -260,7 +260,7 @@ def create_graph(critical_list, data):
         str2 = "{}:\n{}|{}\n{}|{}".format(
             node["activity"], node["es"], node["ef"], node["ls"], node["lf"]
         )
-        #print(str2)
+        print(str2)
         if node["activity"] in critical_list:
             graph.add_node(
                 node["activity"],
@@ -371,4 +371,4 @@ def create_graph_simple(data):
     plt.show()
 
 
-main()
+#main()
