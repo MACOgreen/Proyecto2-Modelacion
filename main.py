@@ -1,19 +1,10 @@
 import sys
 from tkinter import Label, Tk, filedialog, Button
 
-from VentanaCpm import cpm
+from VentanaCpm import cpm, just_graph
 from importData import importDataFunction
 
 data = [
-    {
-        "activity": "start",
-        "duration": 0,
-        "predecessors": [],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
     {
         "activity": "a",
         "duration": 2,
@@ -77,15 +68,6 @@ data = [
         "ls": 0,
         "lf": 0,
     },
-    {
-        "activity": "end",
-        "duration": 0,
-        "predecessors": ["f", "g"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
 ]
 
 ventana = Tk()
@@ -120,8 +102,12 @@ def salir():
 
 
 def vcpm():
-    print(data)
+    # print("Data: \n{}".format(data))
     cpm(data)
+
+
+def view_graph():
+    just_graph(data)
 
 
 ###
@@ -138,7 +124,9 @@ boton_cargar.config(width=15, height=2)
 ##
 
 ##Boton para mostrar el grafo
-boton_grafo = Button(ventana, text="Mostrar Grafo", font=("Arial", 11))
+boton_grafo = Button(
+    ventana, text="Mostrar Grafo", font=("Arial", 11), command=view_graph
+)
 boton_grafo.place(x=190, y=130)
 boton_grafo.config(width=15, height=2)
 ##

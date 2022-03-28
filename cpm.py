@@ -76,7 +76,7 @@ from sympy import true
         "ls": 0,
         "lf": 0,
     },
-]"""
+]
 
 data_unordered = [
     {
@@ -149,7 +149,7 @@ def main():
     ordered_list = order_data(data_unordered)
     cpm = cpm_algorithm(ordered_list)
     create_graph(get_critical_path(cpm), ordered_list)
-    create_graph_simple(ordered_list)
+    create_graph_simple(ordered_list)"""
 
 
 def check_existency(incomplete, complete):
@@ -194,9 +194,12 @@ def order_data(data_list):
                     not_end_nodes.append(act["activity"])
                     ordered_list.append(act)
                     data_list.pop(index)
-                    for index, x in enumerate(not_end_nodes):
-                        if x in act["predecessors"]:
-                            not_end_nodes.pop(index)
+                    for x in act["predecessors"]:
+                        print("revisado: {}".format(x))
+                        print("a revisar: {}".format(act["predecessors"]))
+                        if x in not_end_nodes:
+                            print("eliminado: {}".format(x))
+                            not_end_nodes.remove(x)
             else:
                 act["predecessors"].append("start")
                 ordered_list.append(act)
@@ -205,17 +208,19 @@ def order_data(data_list):
     #    print(node)
     # print(not_end_nodes)
     end_act["predecessors"] = not_end_nodes
-    # print(end_act)
+    print(end_act)
     ordered_list.append(end_act)
     return ordered_list
 
 
 def cpm_algorithm(data):
+    # print("Data: \n{}".format(data))
     for node in data:
         # print("{}: ".format(node["activity"]))
         preds = node["predecessors"]
-        if preds.__len__() > 0:
+        if preds:
             ef_list = [act["ef"] for act in data if act["activity"] in preds]
+            # print("preds: {}\nef list: {}".format(preds, ef_list))
             ef = max(ef_list)
             node["es"] = ef
             node["ef"] = node["es"] + node["duration"]
@@ -260,7 +265,7 @@ def create_graph(critical_list, data):
         str2 = "{}:\n{}|{}\n{}|{}".format(
             node["activity"], node["es"], node["ef"], node["ls"], node["lf"]
         )
-        # print(str2)
+        print(str2)
         if node["activity"] in critical_list:
             graph.add_node(
                 node["activity"],
@@ -371,4 +376,5 @@ def create_graph_simple(data):
     plt.show()
 
 
-main()
+# main()
+
