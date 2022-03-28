@@ -5,15 +5,6 @@ from sympy import true
 
 datas = [
     {
-        "activity": "start",
-        "duration": 0,
-        "predecessors": [],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
         "activity": "a",
         "duration": 2,
         "predecessors": ["start"],
@@ -89,15 +80,6 @@ datas = [
 
 data_unordered = [
     {
-        "activity": "start",
-        "duration": 0,
-        "predecessors": [],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
         "activity": "g",
         "duration": 10,
         "predecessors": ["e"],
@@ -118,7 +100,7 @@ data_unordered = [
     {
         "activity": "b",
         "duration": 5,
-        "predecessors": ["start"],
+        "predecessors": [],
         "es": 0,
         "ef": 0,
         "ls": 0,
@@ -145,7 +127,7 @@ data_unordered = [
     {
         "activity": "a",
         "duration": 2,
-        "predecessors": ["start"],
+        "predecessors": [],
         "es": 0,
         "ef": 0,
         "ls": 0,
@@ -155,15 +137,6 @@ data_unordered = [
         "activity": "e",
         "duration": 3,
         "predecessors": ["d"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "end",
-        "duration": 0,
-        "predecessors": ["f", "g"],
         "es": 0,
         "ef": 0,
         "ls": 0,
@@ -193,7 +166,26 @@ def check_existency(incomplete, complete):
 
 
 def order_data(data_list):
+    start_act = {
+        "activity": "start",
+        "duration": 0,
+        "predecessors": [],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    }
+    end_act = {
+        "activity": "end",
+        "duration": 0,
+        "predecessors": ["f", "g"],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    }
     ordered_list = []
+    ordered_list.append(start_act)
     while data_list:
         for index, act in enumerate(data_list):
             if act["predecessors"]:
@@ -201,11 +193,12 @@ def order_data(data_list):
                     ordered_list.append(act)
                     data_list.pop(index)
             else:
-                # act["predecessors"].append("start")
+                act["predecessors"].append("start")
                 ordered_list.append(act)
                 data_list.pop(index)
     # for node in ordered_list:
     #    print(node)
+    ordered_list.append(end_act)
     return ordered_list
 
 
