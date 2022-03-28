@@ -1,10 +1,10 @@
-from msilib.schema import PublishComponent
 import sys
-from tkinter import Label,Tk, filedialog, Button
+from tkinter import Label, Tk, filedialog, Button
 
 from VentanaCpm import cpm
 from importData import importDataFunction
-data =  [
+
+data = [
     {
         "activity": "start",
         "duration": 0,
@@ -93,62 +93,66 @@ ventana = Tk()
 ##Configuracion la ventana
 ventana.geometry("500x300+500+190")
 ventana.title("Sistema de almacenamiento de actividades.")
-ventana.resizable(width=False,height=False)
+ventana.resizable(width=False, height=False)
 ##
 
 ##Titulo de la ventana
-titulo= Label(ventana,text="Bienvenido! Para comenzar ,cargue un archivo.",font=("Arial",12))
-titulo.place(x=95,y= 20)
+titulo = Label(
+    ventana, text="Bienvenido! Para comenzar ,cargue un archivo.", font=("Arial", 12)
+)
+titulo.place(x=95, y=20)
 ##
 
 ### Funciones
 
+
 def loadDataFile():
     global data
-    filename = filedialog.askopenfilename(initialdir=".", title="Select a File", filetypes=[("Text files","*.txt*")])
+    filename = filedialog.askopenfilename(
+        initialdir=".", title="Select a File", filetypes=[("Text files", "*.txt*")]
+    )
     data = importDataFunction(filename)
-    #print(data)
-    
+    # print(data)
 
-    
-    
 
 def salir():
     sys.exit()
+
 
 def vcpm():
     print(data)
     cpm(data)
 
 
-
 ###
 
 
-### Botones 
+### Botones
 
 ##Boton de carga de archivo
-boton_cargar=Button(ventana,text="Cargar archivo",font=("Arial",11), command=loadDataFile )
-boton_cargar.place(x=190,y=80)
-boton_cargar.config(width=15,height=2)
+boton_cargar = Button(
+    ventana, text="Cargar archivo", font=("Arial", 11), command=loadDataFile
+)
+boton_cargar.place(x=190, y=80)
+boton_cargar.config(width=15, height=2)
 ##
 
 ##Boton para mostrar el grafo
-boton_grafo=Button(ventana,text="Mostrar Grafo",font=("Arial",11))
-boton_grafo.place(x=190,y=130)
-boton_grafo.config(width=15,height=2)
+boton_grafo = Button(ventana, text="Mostrar Grafo", font=("Arial", 11))
+boton_grafo.place(x=190, y=130)
+boton_grafo.config(width=15, height=2)
 ##
 
 ##Boton para aplicar CPM
-boton_cpm=Button(ventana,text="Aplicar Pert Cpm",font=("Arial",11),command=vcpm)
-boton_cpm.place(x=190,y=180)
-boton_cpm.config(width=15,height=2)
+boton_cpm = Button(ventana, text="Aplicar Pert Cpm", font=("Arial", 11), command=vcpm)
+boton_cpm.place(x=190, y=180)
+boton_cpm.config(width=15, height=2)
 ##
 
 ##Boton para salir del sistema
-boton_out=Button(ventana,text="Salir del sistema",font=("Arial",11),command=salir)
-boton_out.place(x=190,y=230)
-boton_out.config(width=15,height=2)
+boton_out = Button(ventana, text="Salir del sistema", font=("Arial", 11), command=salir)
+boton_out.place(x=190, y=230)
+boton_out.config(width=15, height=2)
 ##
 
 ###
