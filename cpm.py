@@ -275,7 +275,7 @@ def create_graph(critical_list, data):
         else:
             graph.add_node(
                 node["activity"],
-                color="cyan",
+                color="gray",
                 es=node["es"],
                 ef=node["ef"],
                 ls=["ls"],
