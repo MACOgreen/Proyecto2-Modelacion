@@ -370,4 +370,4 @@ def create_graph_simple(data):
     plt.show()
 
 
-main()
+#main()
