@@ -91,7 +91,7 @@ titulo.place(x=95, y=20)
 def loadDataFile():
     global data
     filename = filedialog.askopenfilename(
-        initialdir=".", title="Select a File", filetypes=[("Text files", "*.txt*")]
+        initialdir=".", title="Select a File", filetypes=[("Text files", "*.txt")]
     )
     data = importDataFunction(filename)
     # print(data)
