@@ -6,105 +6,20 @@ from importData import importDataFunction
 from cpm import create_graph_simple;
 
 #Lista ordenada
-# data = [
-#     {
-#         "activity": "start",
-#         "duration": 0,
-#         "predecessors": [],
-#         "es": 0,
-#         "ef": 0,
-#         "ls": 0,
-#         "lf": 0,
-#     },
-#     {
-#         "activity": "a",
-#         "duration": 2,
-#         "predecessors": ["start"],
-#         "es": 0,
-#         "ef": 0,
-#         "ls": 0,
-#         "lf": 0,
-#     },
-#     {
-#         "activity": "b",
-#         "duration": 5,
-#         "predecessors": ["start"],
-#         "es": 0,
-#         "ef": 0,
-#         "ls": 0,
-#         "lf": 0,
-#     },
-#     {
-#         "activity": "c",
-#         "duration": 4,
-#         "predecessors": ["a"],
-#         "es": 0,
-#         "ef": 0,
-#         "ls": 0,
-#         "lf": 0,
-#     },
-#     {
-#         "activity": "d",
-#         "duration": 6,
-#         "predecessors": ["b", "c"],
-#         "es": 0,
-#         "ef": 0,
-#         "ls": 0,
-#         "lf": 0,
-#     },
-#     {
-#         "activity": "e",
-#         "duration": 3,
-#         "predecessors": ["d"],
-#         "es": 0,
-#         "ef": 0,
-#         "ls": 0,
-#         "lf": 0,
-#     },
-#     {
-#         "activity": "f",
-#         "duration": 8,
-#         "predecessors": ["e"],
-#         "es": 0,
-#         "ef": 0,
-#         "ls": 0,
-#         "lf": 0,
-#     },
-#     {
-#         "activity": "g",
-#         "duration": 10,
-#         "predecessors": ["e"],
-#         "es": 0,
-#         "ef": 0,
-#         "ls": 0,
-#         "lf": 0,
-#     },
-#     {
-#         "activity": "end",
-#         "duration": 0,
-#         "predecessors": ["f", "g"],
-#         "es": 0,
-#         "ef": 0,
-#         "ls": 0,
-#         "lf": 0,
-#     },
-# ]
-
-#Lista desordenada
 data = [
     {
-        "activity": "g",
-        "duration": 10,
-        "predecessors": ["e"],
+        "activity": "start",
+        "duration": 0,
+        "predecessors": [],
         "es": 0,
         "ef": 0,
         "ls": 0,
         "lf": 0,
     },
     {
-        "activity": "f",
-        "duration": 8,
-        "predecessors": ["e"],
+        "activity": "a",
+        "duration": 2,
+        "predecessors": ["start"],
         "es": 0,
         "ef": 0,
         "ls": 0,
@@ -113,7 +28,7 @@ data = [
     {
         "activity": "b",
         "duration": 5,
-        "predecessors": [],
+        "predecessors": ["start"],
         "es": 0,
         "ef": 0,
         "ls": 0,
@@ -138,15 +53,6 @@ data = [
         "lf": 0,
     },
     {
-        "activity": "a",
-        "duration": 2,
-        "predecessors": [],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
         "activity": "e",
         "duration": 3,
         "predecessors": ["d"],
@@ -155,7 +61,101 @@ data = [
         "ls": 0,
         "lf": 0,
     },
+    {
+        "activity": "f",
+        "duration": 8,
+        "predecessors": ["e"],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    },
+    {
+        "activity": "g",
+        "duration": 10,
+        "predecessors": ["e"],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    },
+    {
+        "activity": "end",
+        "duration": 0,
+        "predecessors": ["f", "g"],
+        "es": 0,
+        "ef": 0,
+        "ls": 0,
+        "lf": 0,
+    },
 ]
+
+#Lista desordenada
+# data = [
+#     {
+#         "activity": "g",
+#         "duration": 10,
+#         "predecessors": ["e"],
+#         "es": 0,
+#         "ef": 0,
+#         "ls": 0,
+#         "lf": 0,
+#     },
+#     {
+#         "activity": "f",
+#         "duration": 8,
+#         "predecessors": ["e"],
+#         "es": 0,
+#         "ef": 0,
+#         "ls": 0,
+#         "lf": 0,
+#     },
+#     {
+#         "activity": "b",
+#         "duration": 5,
+#         "predecessors": [],
+#         "es": 0,
+#         "ef": 0,
+#         "ls": 0,
+#         "lf": 0,
+#     },
+#     {
+#         "activity": "c",
+#         "duration": 4,
+#         "predecessors": ["a"],
+#         "es": 0,
+#         "ef": 0,
+#         "ls": 0,
+#         "lf": 0,
+#     },
+#     {
+#         "activity": "d",
+#         "duration": 6,
+#         "predecessors": ["b", "c"],
+#         "es": 0,
+#         "ef": 0,
+#         "ls": 0,
+#         "lf": 0,
+#     },
+#     {
+#         "activity": "a",
+#         "duration": 2,
+#         "predecessors": [],
+#         "es": 0,
+#         "ef": 0,
+#         "ls": 0,
+#         "lf": 0,
+#     },
+#     {
+#         "activity": "e",
+#         "duration": 3,
+#         "predecessors": ["d"],
+#         "es": 0,
+#         "ef": 0,
+#         "ls": 0,
+#         "lf": 0,
+#     },
+# ]
 
 
 ventana = Tk()
@@ -181,8 +181,9 @@ def loadDataFile():
     filename = filedialog.askopenfilename(
         initialdir=".", title="Select a File", filetypes=[("Text files", "*.txt*")]
     )
+    print(data)
     data = importDataFunction(filename)
-    # print(data)
+    print(data)
 
 
 def salir():
@@ -190,7 +191,7 @@ def salir():
 
 
 def vcpm():
-    print(data)
+    #print(data)
     cpm(data)
 
 def mostrarGrafo():

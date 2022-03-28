@@ -30,7 +30,7 @@ def cpm(data):
 
 
     ####Ejecucion al abrir la ventana
-    data=order_data(data)
+    #data=order_data(data)
     for node in cpm_algorithm(data):
         str2 ="Actividad: {}  ||Earty Start: {}||  Early finish: {}||  Late Start: {}||  Late finish: {}".format(
             node["activity"], node["es"], node["ef"], node["ls"], node["lf"]
