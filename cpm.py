@@ -1,6 +1,5 @@
 from matplotlib import pyplot as plt
 import networkx as nx
-from sympy import true
 
 
 """datas = [
@@ -76,7 +75,7 @@ from sympy import true
         "ls": 0,
         "lf": 0,
     },
-]"""
+]
 
 # data_unordered = [
 #     {
@@ -149,7 +148,7 @@ def main():
     ordered_list = order_data(data_unordered)
     cpm = cpm_algorithm(ordered_list)
     create_graph(get_critical_path(cpm), ordered_list)
-    create_graph_simple(ordered_list)
+    create_graph_simple(ordered_list)"""
 
 
 def check_existency(incomplete, complete):
@@ -160,7 +159,7 @@ def check_existency(incomplete, complete):
             if node == node2["activity"]:
                 cont += 1
     if cont == incomplete.__len__():
-        return true
+        return True
     else:
         return False
 
@@ -194,9 +193,9 @@ def order_data(data_list):
                     not_end_nodes.append(act["activity"])
                     ordered_list.append(act)
                     data_list.pop(index)
-                    for index, x in enumerate(not_end_nodes):
-                        if x in act["predecessors"]:
-                            not_end_nodes.pop(index)
+                    for x in act["predecessors"]:
+                        if x in not_end_nodes:
+                            not_end_nodes.remove(x)
             else:
                 act["predecessors"].append("start")
                 ordered_list.append(act)
@@ -210,11 +209,13 @@ def order_data(data_list):
     return ordered_list
 
 def cpm_algorithm(data):
+    # print("Data: \n{}".format(data))
     for node in data:
         # print("{}: ".format(node["activity"]))
         preds = node["predecessors"]
-        if preds.__len__() > 0:
+        if preds:
             ef_list = [act["ef"] for act in data if act["activity"] in preds]
+            # print("preds: {}\nef list: {}".format(preds, ef_list))
             ef = max(ef_list)
             node["es"] = ef
             node["ef"] = node["es"] + node["duration"]
@@ -255,7 +256,10 @@ def get_critical_path(activities):
 def create_graph(critical_list, data):
     graph = nx.Graph()
     for node in data:
-        str = "{}|{}\n{}|{}".format(node["es"], node["ef"], node["ls"], node["lf"])
+        holgura = node["lf"] - node["ef"]
+        str = "{}|{}\n{}|{}-{}".format(
+            node["es"], node["ef"], node["ls"], node["lf"], holgura
+        )
         str2 = "{}:\n{}|{}\n{}|{}".format(
             node["activity"], node["es"], node["ef"], node["ls"], node["lf"]
         )
@@ -273,7 +277,7 @@ def create_graph(critical_list, data):
         else:
             graph.add_node(
                 node["activity"],
-                color="cyan",
+                color="gray",
                 es=node["es"],
                 ef=node["ef"],
                 ls=["ls"],
@@ -318,7 +322,7 @@ def create_graph(critical_list, data):
     shift = [0, 0.45]
     shifted_pos = {node: node_pos + shift for node, node_pos in pos.items()}
     nx.draw_networkx_labels(
-        graph, shifted_pos, labels=labels, horizontalalignment="center"
+        graph, shifted_pos, labels=labels, horizontalalignment="left"
     )
     # turn off frame
     plt.axis("off")
@@ -370,4 +374,5 @@ def create_graph_simple(data):
     plt.show()
 
 
-#main()
+# main()
+

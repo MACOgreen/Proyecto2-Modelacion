@@ -1,21 +1,12 @@
 import sys
 from tkinter import Label, Tk, filedialog, Button
 
-from VentanaCpm import cpm
+from VentanaCpm import cpm, just_graph
 from importData import importDataFunction
 from cpm import create_graph_simple;
 
 #Lista ordenada
 data = [
-    {
-        "activity": "start",
-        "duration": 0,
-        "predecessors": [],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
     {
         "activity": "a",
         "duration": 2,
@@ -74,15 +65,6 @@ data = [
         "activity": "g",
         "duration": 10,
         "predecessors": ["e"],
-        "es": 0,
-        "ef": 0,
-        "ls": 0,
-        "lf": 0,
-    },
-    {
-        "activity": "end",
-        "duration": 0,
-        "predecessors": ["f", "g"],
         "es": 0,
         "ef": 0,
         "ls": 0,
@@ -179,7 +161,7 @@ titulo.place(x=95, y=20)
 def loadDataFile():
     global data
     filename = filedialog.askopenfilename(
-        initialdir=".", title="Select a File", filetypes=[("Text files", "*.txt*")]
+        initialdir=".", title="Select a File", filetypes=[("Text files", "*.txt")]
     )
     print(data)
     data = importDataFunction(filename)
@@ -191,11 +173,13 @@ def salir():
 
 
 def vcpm():
-    #print(data)
     cpm(data)
 
-def mostrarGrafo():
-    create_graph_simple(data)
+
+
+
+def view_graph():
+    just_graph(data)
 
 
 ###
@@ -212,7 +196,9 @@ boton_cargar.config(width=15, height=2)
 ##
 
 ##Boton para mostrar el grafo
-boton_grafo = Button(ventana, text="Mostrar Grafo", font=("Arial", 11), command=mostrarGrafo)
+boton_grafo = Button(
+    ventana, text="Mostrar Grafo", font=("Arial", 11), command=view_graph
+)
 boton_grafo.place(x=190, y=130)
 boton_grafo.config(width=15, height=2)
 ##
