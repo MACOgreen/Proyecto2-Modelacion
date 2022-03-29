@@ -17,15 +17,15 @@ def cpm(data):
     ordered_list = order_data(data.copy())
     ventana = Tk()
     ##Configuracion la ventana
-    ventana.geometry("500x300+500+190")
+    ventana.geometry("652x300+500+190")
     ventana.title("Ventana Cpm")
     ventana.resizable(width=False, height=False)
     ##
 
     ## Lista de actividades.
     lista = Listbox(ventana)
-    lista.place(x=20, y=10)
-    lista.config(width=50, font=("Arial", 12))
+    lista.place(x=9, y=10)
+    lista.config(width=70, font=("Arial", 12))
     ##
     ###Funciones
     def graficar():
@@ -43,14 +43,15 @@ def cpm(data):
         font=("Arial", 11),
         command=graficar,
     )
-    boton_grafo.place(x=160, y=230)
+    boton_grafo.place(x=221, y=230)
     boton_grafo.config(width=22, height=2)
     ##
 
     ####Ejecucion al abrir la ventana
     for node in cpm_algorithm(ordered_list):
-        str2 = "Actividad: {}  ||Earty Start: {}||  Early finish: {}||  Late Start: {}||  Late finish: {}".format(
-            node["activity"], node["es"], node["ef"], node["ls"], node["lf"]
+        holgura = node["ls"] - node["es"]
+        str2 = "Actividad: {}  ||Earty Start: {}||  Early finish: {}||  Late Start: {}||  Late finish: {}|| Holgura: {}".format(
+            node["activity"], node["es"], node["ef"], node["ls"], node["lf"],holgura
         )
         lista.insert(END, str2)
         lista.insert(END, "")
